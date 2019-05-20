@@ -7,45 +7,39 @@ import static org.junit.jupiter.api.Assertions.*;
 class CommandProcessorTest {
 
     @Test
-    void getCommand() {
+    void shouldGreetUser() {
+        Greeting greets = new JDBC();
         CommandExtractor command = new CommandExtractor("greet yamkela xhosa");
 
-CommandProcessor commandProcessor = new CommandProcessor();
+        CommandProcessor commandProcessor = new CommandProcessor(greets);
 
         assertEquals(commandProcessor.processCommands(command), "Molo, yamkela");
-}
-
-    @Test
-    void getCommand_2() {
-        CommandExtractor command = new CommandExtractor("greet yamkela");
-
-        assertEquals("greet", command.getCommand());
-        assertEquals("yamkela", command.getUserName());
-        assertEquals("english", command.getLanguage());
-    }
-
-    @Test
-    void getCommand_3() {
-        CommandExtractor command = new CommandExtractor("greet");
-
-        assertEquals("greet", command.getCommand());
-        assertEquals(null, command.getUserName());
-        assertEquals("english", command.getLanguage());
     }
     @Test
-    void greetedCommand(){
-        CommandExtractor commandProcessor = new CommandExtractor("greeted");
-        assertEquals("greeted", commandProcessor.getCommand());
+    void shouldCountGreetedUsers(){
+        Greeting greeting = new JDBC();
+        CommandExtractor commandExtractor = new CommandExtractor("count");
+        CommandProcessor commandProcessor = new CommandProcessor(greeting);
+        assertEquals("The number of greeted people greeted is: 1", greeting.count());
     }
     @Test
-    void greetedCommand_2(){
-        CommandExtractor commandProcessor = new CommandExtractor("greeted yash");
-        assertEquals("greeted", commandProcessor.getCommand());
-        assertEquals("yash", commandProcessor.getUserName());
+    void shouldDisplayGreetedUsers(){
+        Greeting greeting = new JDBC();
+        CommandExtractor commandExtractor = new CommandExtractor("greeted");
+        CommandProcessor commandProcessor = new CommandProcessor(greeting);
+        assertEquals("{}", greeting.greeted(null));
     }
     @Test
-    void counterCommand(){
-        CommandExtractor commandProcessor = new CommandExtractor("count");
-        assertEquals("count", commandProcessor.getCommand());
+    void shouldClearAUser(){
+        Greeting greeting = new JDBC();
+        CommandExtractor commandExtractor = new CommandExtractor("clear");
+        CommandProcessor commandProcessor = new CommandProcessor(greeting);
+        assertEquals("Yamkela has been cleared ", greeting.clear("Yamkela"));
     }
-}
+    @Test
+    void shouldClearAllUsers(){
+    Greeting greeting = new JDBC();
+    CommandExtractor commandExtractor = new CommandExtractor("clearAll");
+    CommandProcessor commandProcessor = new CommandProcessor(greeting);
+    assertEquals("All names are cleared", greeting.clearAll());
+}}

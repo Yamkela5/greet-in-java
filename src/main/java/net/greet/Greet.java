@@ -8,7 +8,7 @@ public class Greet {
 
         Scanner myScanner = new Scanner(System.in);
         Greeting greets = new JDBC();
-        CommandProcessor commandExtracter = new CommandProcessor();
+        CommandProcessor commandExtracter = new CommandProcessor(greets);
 
         while (true) {
             System.out.println("Please enter a command");

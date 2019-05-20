@@ -3,6 +3,10 @@ package net.greet;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
+
+
 public class CommandExtractorTest {
     @Test
     void getAname(){
