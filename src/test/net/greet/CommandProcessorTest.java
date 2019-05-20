@@ -20,26 +20,26 @@ class CommandProcessorTest {
         Greeting greeting = new JDBC();
         CommandExtractor commandExtractor = new CommandExtractor("count");
         CommandProcessor commandProcessor = new CommandProcessor(greeting);
-        assertEquals("The number of greeted people greeted is: 1", greeting.count());
+        assertEquals("The number of greeted people greeted is: 0", commandProcessor.processCommands(commandExtractor));
     }
     @Test
     void shouldDisplayGreetedUsers(){
         Greeting greeting = new JDBC();
         CommandExtractor commandExtractor = new CommandExtractor("greeted");
         CommandProcessor commandProcessor = new CommandProcessor(greeting);
-        assertEquals("{}", greeting.greeted(null));
+        assertEquals("{}", commandProcessor.processCommands(commandExtractor));
     }
     @Test
     void shouldClearAUser(){
         Greeting greeting = new JDBC();
-        CommandExtractor commandExtractor = new CommandExtractor("clear");
+        CommandExtractor commandExtractor = new CommandExtractor("clear Yamkela");
         CommandProcessor commandProcessor = new CommandProcessor(greeting);
-        assertEquals("Yamkela has been cleared ", greeting.clear("Yamkela"));
+        assertEquals("Yamkela has been cleared ", "Yamkela has been cleared ", commandProcessor.processCommands(commandExtractor));
     }
     @Test
     void shouldClearAllUsers(){
     Greeting greeting = new JDBC();
-    CommandExtractor commandExtractor = new CommandExtractor("clearAll");
+    CommandExtractor commandExtractor = new CommandExtractor("clear");
     CommandProcessor commandProcessor = new CommandProcessor(greeting);
-    assertEquals("All names are cleared", greeting.clearAll());
+    assertEquals("All names are cleared", commandProcessor.processCommands(commandExtractor));
 }}

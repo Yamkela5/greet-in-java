@@ -20,16 +20,11 @@ public class CommandProcessor {
         } else if (commandProcessor.getCommand().equals("count")) {
             return greeting.count();
         } else if (commandProcessor.getCommand().equals("clear")) {
-
             if (commandProcessor.getUserName() != null) {
-                greeting.clear(commandProcessor.getUserName());
+               return greeting.clear(commandProcessor.getUserName());
             } else {
-                greeting.clearAll();
+                return greeting.clearAll();
             }
-        }
-        else if (commandProcessor.getCommand().equals("help")) {
-
-            return greeting.help();
         }
        else{
 

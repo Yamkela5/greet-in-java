@@ -26,7 +26,7 @@ public class JDBC implements Greeting {
     public JDBC() {
         try {
             conn = DriverManager.
-                        getConnection("jdbc:h2:./target/greet-in-java", "sa", "");
+                    getConnection("jdbc:h2:./target/greet-in-java", "sa", "");
             psCreateNewGreetings = conn.prepareStatement(INSERT_USER_SQL);
             psGreetsCount = conn.prepareStatement(FIND_USER_SQL);
             psUpdateGreetsCount = conn.prepareStatement(UPDATE_USER_SQL);
@@ -104,16 +104,6 @@ public class JDBC implements Greeting {
         }
     }
 
-    public String clear(String userName) {
-        try {
-            psDelUser.setString(1, userName.toString());
-            psDelUser.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return userName + " has been cleared ";
-    }
-
     public String clearAll() {
         try {
             psDelAll.executeUpdate();
@@ -123,15 +113,25 @@ public class JDBC implements Greeting {
         return "All names are cleared";
     }
 
+    public String clear(String userName) {
+        try {
+            psDelUser.setString(1, userName.toString());
+            psDelUser.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return userName + " has been cleared ";
+    }
     public String help() {
         return " Valid commands are:\n\n" +
                 "greet >> followed by the name and the language the user is to be greeted in,\n" +
                 "greeted >> should display a list of all users that has been greeted and how many time each user has been greeted,\n" +
                 "greeted followed by a username >> returns how many times that username have been greeted,\n" +
                 "counter >> returns a count of how many unique users has been greeted,\n" +
-                "clear >> deletes of all users greeted and the reset the greet counter to 0,\n" +
+                "clearAll >> deletes of all users greeted and the reset the greet counter to 0,\n" +
                 "clear followed by a username >> delete the greet counter for the specified user and decrement the greet counter by 1,\n" +
                 "exit >> exits the application,\n" +
                 "help >> shows a user an overview of all possible commands.";
     }
 }
+
